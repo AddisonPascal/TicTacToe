@@ -21,9 +21,13 @@ set g=7
 set h=8
 set i=9
 cls
-echo User wins: %userWins%
-echo Computer wins: %computerWins%
-echo Draws: %draws%
+set /a games=%userWins%+%computerWins%+%draws%
+set /a userPercentage=%userWins%/%games%*100
+set /a computerPercentage=%computerWins%/%games%*100
+set /a drawPercentage=%draws%/%games%*100
+echo User wins: %userWins% [%userPercentage%%%]
+echo Computer wins: %computerWins% [%computerPercentage%%%]
+echo Draws: %draws% [%drawPercentage%%%]
 echo 1= Play
 echo 2= Resume game from ID
 echo 3= Create ID from game
