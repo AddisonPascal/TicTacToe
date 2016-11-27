@@ -22,9 +22,10 @@ set h=8
 set i=9
 cls
 set /a games=%userWins%+%computerWins%+%draws%
-set /a userPercentage=%userWins%/%games%*100
-set /a computerPercentage=%computerWins%/%games%*100
-set /a drawPercentage=%draws%/%games%*100
+set /a userPercentage=%userWins%*100/%games%
+set /a computerPercentage=%computerWins%*100/%games%
+set /a drawPercentage=%draws%*100/%games%
+echo Total games played: %games%
 echo User wins: %userWins% [%userPercentage%%%]
 echo Computer wins: %computerWins% [%computerPercentage%%%]
 echo Draws: %draws% [%drawPercentage%%%]
