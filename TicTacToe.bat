@@ -1,5 +1,5 @@
 @echo off
-:: Version: 3.3.0
+:: Version: 3.3.7
 cls
 mode 1000
 set userWins=0
@@ -74,28 +74,35 @@ SET i=%id:~8,1%
 SET t=%id:~9,1%
 if %t%==d (
 set turn=Draw
+set type=draw
 )
 if %t%==p (
 set turn=O won
+set type=win
 )
 if %t%==y (
 set turn=X won
+set type=win
 )
 set show=no
 if %t%==x (
 set turn=X goes next
+set type=position
 set show=yes
 )
 if %t%==o (
 set turn=O goes next
+set type=position
 set show=yes
 )
 if %t%==X (
 set turn=X goes next
+set type=position
 set show=yes
 )
 if %t%==O (
 set turn=O goes next
+set type=position
 set show=yes
 )
 cls
@@ -123,6 +130,7 @@ echo [     %aq% %bq% %cq%     ]
 echo [     %dq% %eq% %fq%     ]
 echo [     %gq% %hq% %iq%     ]
 echo %turn%
+echo E: Share %type% via email
 echo C= Copy ID to clipboard (right-click in the ID field to paste + enter)
 echo 1= Go back to home
 if %show%==yes (
@@ -131,6 +139,8 @@ echo 2= Continue game as X
 set show=no
 set resume=null
 set /p resume="-->"
+if %resume%==e goto email
+if %resume%==E goto email
 if %resume%==1 goto home
 if %resume%==c goto copy
 if %resume%==C goto copy
@@ -138,6 +148,11 @@ if %resume%==2 (
 if "%turn%"=="X goes next" goto userGo
 if "%turn%"=="O goes next" goto computerGo
 )
+goto fromID
+
+:email
+cls
+start iexplore mailto:?subject=Cool%%20Tic%%20Tac%%20Toe%%20%type%^&body=ID:%%20%id%%%20%%20%%20%%20%%20^(ask%%20mailto:addisondj^@hotmail.com)
 goto fromID
 
 :copy
