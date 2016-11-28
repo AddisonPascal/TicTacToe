@@ -22,6 +22,8 @@ set g=7
 set h=8
 set i=9
 cls
+set score=0
+set rating=100
 set /a score=(%userWins%*10)+(%draws*5)
 set /a games=%userWins%+%computerWins%+%draws%
 set /a userPercentage=%userWins%*100/%games%
@@ -36,7 +38,13 @@ echo USER SCORE PERCENTAGE: %scorePercentage%%%
 echo User wins: %userWins% [%userPercentage%%%]
 echo Computer wins: %computerWins% [%computerPercentage%%%]
 echo Draws: %draws% [%drawPercentage%%%]
+if %rating% NEQ 100 (
 echo You are %rating%%% as good as the program. 
+)
+if %rating%==100 (
+if %games% GEQ 20 echo You are 100%% as good as the program. Well done!
+if %games% LEQ 20 echo Not enough games played. Cannot get score
+)
 echo 1= Play
 echo 2= Resume game from ID
 echo 3= Create ID from game
