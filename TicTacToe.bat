@@ -1,5 +1,5 @@
 @echo off
-:: Version: 3.3.7
+:: Version: 3.3.8
 cls
 mode 1000
 set userWins=0
@@ -25,6 +25,7 @@ set /a games=%userWins%+%computerWins%+%draws%
 set /a userPercentage=%userWins%*100/%games%
 set /a computerPercentage=%computerWins%*100/%games%
 set /a drawPercentage=%draws%*100/%games%
+cls
 echo Total games played: %games%
 echo User wins: %userWins% [%userPercentage%%%]
 echo Computer wins: %computerWins% [%computerPercentage%%%]
@@ -296,7 +297,7 @@ if %b%==%c% (
 if %a%==1 set opt=a
 )
 if %a%==%c% (
-if %b%==2 set opt=f
+if %b%==2 set opt=b
 )
 if %d%==%e% (
 if %f%==6 set opt=f
