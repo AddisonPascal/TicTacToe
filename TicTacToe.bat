@@ -1,5 +1,5 @@
 @echo off
-:: Version: 3.4.3
+:: Version: 3.4.4
 cls
 mode 1000
 set userWins=0
@@ -10,6 +10,7 @@ title Tic Tac Toe!
 goto home
 
 :home
+set write=yes
 set option=null
 set a=1
 set b=2
@@ -152,6 +153,7 @@ if %resume%==1 goto home
 if %resume%==c goto copy
 if %resume%==C goto copy
 if %resume%==2 (
+set write=no
 if "%turn%"=="X goes next" goto userGo
 if "%turn%"=="O goes next" goto computerGo
 )
@@ -603,6 +605,7 @@ pause
 goto save
 
 :save
+if %write%==no goto fromID
 (
 echo set userWins=%userWins%
 echo set computerWins=%computerWins%
