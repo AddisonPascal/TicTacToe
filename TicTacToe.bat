@@ -605,7 +605,10 @@ pause
 goto save
 
 :save
-if %write%==no goto fromID
+if %write%==no (
+call data.bat
+goto fromID
+)
 (
 echo set userWins=%userWins%
 echo set computerWins=%computerWins%
