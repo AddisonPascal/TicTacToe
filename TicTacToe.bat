@@ -1,5 +1,5 @@
 @echo off
-:: Version: 3.3.8
+:: Version: 3.3.9
 cls
 mode 1000
 set userWins=0
@@ -289,7 +289,7 @@ if %e%==%g% goto userWon
 call :draw
 cls
 :compute
-set opt=rnd
+set opt=e
 if %a%==%b% (
 if %c%==3 set opt=c
 )
