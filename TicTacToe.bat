@@ -1,5 +1,5 @@
 @echo off
-:: Version: 3.4.1
+:: Version: 3.4.3
 cls
 mode 1000
 set userWins=0
@@ -21,15 +21,21 @@ set g=7
 set h=8
 set i=9
 cls
+set /a score=(%userWins%*10)+(%draws*5)
 set /a games=%userWins%+%computerWins%+%draws%
 set /a userPercentage=%userWins%*100/%games%
 set /a computerPercentage=%computerWins%*100/%games%
 set /a drawPercentage=%draws%*100/%games%
+set /a scorePercentage=%score%*10/%games%
+set /a rating=%score%*20/%games%
 cls
 echo Total games played: %games%
+echo USER SCORE x10: %score% / %games%0
+echo USER SCORE PERCENTAGE: %scorePercentage%%%
 echo User wins: %userWins% [%userPercentage%%%]
 echo Computer wins: %computerWins% [%computerPercentage%%%]
 echo Draws: %draws% [%drawPercentage%%%]
+echo You are %rating%%% as good as the program. 
 echo 1= Play
 echo 2= Resume game from ID
 echo 3= Create ID from game
@@ -377,6 +383,9 @@ if %e%==5 set opt=e
 if %g%==%e% (
 if %c%==3 set opt=c
 )
+set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%o
+if %id%==12X4O6X89o set opt=f
+if %id%==X234O678Xo set opt=f
 if %opt%==a (
 if %a%==1 goto finishCompute
 )
