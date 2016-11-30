@@ -1,5 +1,5 @@
 @echo off
-:: Version: 3.4.4
+:: Version: 3.4.5
 cls
 mode 1000
 set userWins=0
@@ -43,7 +43,7 @@ echo You are %rating%%% as good as the program.
 )
 if %rating%==100 (
 if %games% GEQ 20 echo You are 100%% as good as the program. Well done!
-if %games% LEQ 20 echo Not enough games played. Cannot get score
+if %games% LEQ 19 echo Not enough games played. Cannot get score
 )
 echo 1= Play
 echo 2= Resume game from ID
@@ -54,6 +54,17 @@ if %home%==1 goto play
 if %home%==2 goto resume
 if %home%==3 goto createID
 if %home%==4 exit
+goto home
+
+:eloDiff
+set /a scop=%scorePercentage%/100
+(
+echo ^<script^>
+echo var EloDifference = -400 * Math.log^(1 / %scop% - 1^) ^/ Math.LN10^;
+echo alert^(EloDifference^)^;
+echo ^<^/script^>
+)>eloDiff.html
+"eloDiff.html"
 goto home
 
 :createID
