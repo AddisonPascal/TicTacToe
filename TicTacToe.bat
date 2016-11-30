@@ -1,17 +1,27 @@
+:: Version: 3.4.6
+:: Made by AddisonPascal (Addison Djatschenko)
+::
+:: Update info: 
+:: Commented most of the program
+:: 
+:: 
+
 @echo off
-:: Version: 3.4.5
 cls
+:: Fullscreen
 mode 1000
 set userWins=0
 set computerWins=0
 set draws=0
 call data.bat
+:: Set title
 title Tic Tac Toe!
 goto home
 
 :home
 set write=yes
 set option=null
+:: Setting position variables to default
 set a=1
 set b=2
 set c=3
@@ -22,6 +32,7 @@ set g=7
 set h=8
 set i=9
 cls
+:: Works out scores and rating
 set score=0
 set rating=100
 set /a score=(%userWins%*10)+(%draws*5)
@@ -32,6 +43,7 @@ set /a drawPercentage=%draws%*100/%games%
 set /a scorePercentage=%score%*10/%games%
 set /a rating=%score%*20/%games%
 cls
+:: Displays score and rating
 echo Total games played: %games%
 echo USER SCORE x10: %score% / %games%0
 echo USER SCORE PERCENTAGE: %scorePercentage%%%
@@ -56,17 +68,6 @@ if %home%==3 goto createID
 if %home%==4 exit
 goto home
 
-:eloDiff
-set /a scop=%scorePercentage%/100
-(
-echo ^<script^>
-echo var EloDifference = -400 * Math.log^(1 / %scop% - 1^) ^/ Math.LN10^;
-echo alert^(EloDifference^)^;
-echo ^<^/script^>
-)>eloDiff.html
-"eloDiff.html"
-goto home
-
 :createID
 cls
 echo 1 2 3
@@ -89,6 +90,7 @@ goto fromID
 cls
 set /p id="ID: "
 :fromID
+:: Uses substrings to get the appropriate variables
 SET a=%id:~0,1%
 SET b=%id:~1,1%
 SET c=%id:~2,1%
@@ -135,6 +137,7 @@ set show=yes
 cls
 echo Remember, X is user and O is computer!
 echo ID: %id%
+:: For a better look
 set aq=-
 set bq=-
 set cq=-
@@ -188,12 +191,14 @@ goto fromID
 goto fromID
 
 :play
+:: Sets who goes first to random. 
 set /a whoGoes=%RANDOM% * (2 - 0 + 1) / 32768 + 0
 if %whoGoes%==2 goto userGo
 if %whoGoes%==1 goto computerGo
 goto play
 
 :userGo
+:: Sees if the game is a win for the computer
 if %a%==%b% (
 if %b%==%c% goto computerWon
 )
@@ -220,6 +225,7 @@ if %e%==%g% goto computerWon
 )
 call :draw
 cls
+:: Creates & displays ID, shows position
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%x
 echo ID: %a%%b%%c%%d%%e%%f%%g%%h%%i%x
 echo You: X
@@ -232,6 +238,7 @@ echo.
 echo Enter your option, or type 'info':
 set /p option="-->"
 if %option%==info goto fromID
+:: Just to make sure that the user's option is valid. 
 if %option%==1 (
 if %a%==1 goto ax
 )
@@ -289,6 +296,7 @@ set i=X
 goto computerGo
 
 :computerGo
+:: Checks if the user won (for playing from a different position ID)
 if %a%==%b% (
 if %b%==%c% goto userWon
 )
@@ -316,22 +324,28 @@ if %e%==%g% goto userWon
 call :draw
 cls
 :compute
+:: 2nd-last resort option
 )
 if %a%==1 (
 set opt=a
 )
+:: 3rd-last resort option
 if %c%==3 (
 set opt=c
 )
+:: 4th-last resort option
 if %g%==7 (
 set opt=g
 )
+:: 5th-last resort option
 if %i%==9 (
 set opt=i
 )
+:: 6th-last resort option
 if %e%==5 (
 set opt=e
 )
+:: Checks to see if the computer can block or win (second best option)
 if %a%==%b% (
 if %c%==3 set opt=c
 )
@@ -404,6 +418,7 @@ if %e%==5 set opt=e
 if %g%==%e% (
 if %c%==3 set opt=c
 )
+:: Blocks a coming fork (best option)
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%o
 if %id%==12X4O6X89o set opt=f
 if %id%==X234O678Xo set opt=f
@@ -435,6 +450,7 @@ if %opt%==i (
 if %i%==9 goto finishCompute
 )
 :computel
+:: Last resort option
 set /a randomInt=%RANDOM% * (9 - 0 + 1) / 32768 + 0
 if %randomInt%==1 (
 if %a% NEQ 1 goto compute
@@ -519,10 +535,12 @@ if %opt%==i (
 set i=O
 goto userGo
 )
+:: Impossible to get here. 
 exit
 
 :computerWon
 cls
+:: Computer winning info
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%p
 echo ID: %a%%b%%c%%d%%e%%f%%g%%h%%i%p
 echo You: X
@@ -556,6 +574,7 @@ pause
 goto save
 
 :userWon
+:: User winning info
 cls
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%y
 echo ID: %a%%b%%c%%d%%e%%f%%g%%h%%i%y
@@ -591,6 +610,7 @@ goto save
 
 :isDraw
 cls
+:: Drawing info
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%d
 echo ID: %a%%b%%c%%d%%e%%f%%g%%h%%i%d
 echo You: X
@@ -624,10 +644,12 @@ pause
 goto save
 
 :save
+:: If write = no, go straight to fromID
 if %write%==no (
 call data.bat
 goto fromID
 )
+:: Otherwise, save to data.bat
 (
 echo set userWins=%userWins%
 echo set computerWins=%computerWins%
@@ -636,6 +658,7 @@ echo set draws=%draws%
 goto fromID
 
 :draw
+:: Checks if the result is a draw
 set drawTest=t
 if %a%==1 set drawTest=%drawTest%a
 if %b%==2 set drawTest=%drawTest%b
