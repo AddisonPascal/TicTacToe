@@ -1,10 +1,9 @@
-:: Version: 3.4.8
+:: Version: 3.4.9
 :: Made by AddisonPascal (Addison Djatschenko)
 :: A perfect batch program for Tic Tac Toe. 
-:: PS: If you are reading this, you are probably either a friend of mine or a GitHub user
 ::
 :: Update info: 
-:: Added description
+:: Removed redundant userWins variable in savefile.
 :: 
 :: 
 
@@ -59,7 +58,6 @@ if %rating%==100 (
 if %games% GEQ 10 echo You are 100%% as good as the program. Well done!
 if %games% LEQ 9 echo Not enough games played. Cannot get score
 if %games%==20 echo Well done, 20 in a row!
-if %games% GEQ 100 echo WELL DONE, 100 IN A ROW!!!!! CONTACT ADDISON WITH THE CODE "0%random%.%random%.009"
 )
 echo 1= Play
 echo 2= Resume game from ID
@@ -655,7 +653,6 @@ goto fromID
 )
 :: Otherwise, save to data.bat
 (
-echo set userWins=%userWins%
 echo set computerWins=%computerWins%
 echo set draws=%draws%
 )>data.bat
