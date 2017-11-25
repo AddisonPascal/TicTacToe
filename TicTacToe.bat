@@ -47,6 +47,7 @@ set /a computerPercentage=%computerWins%*100/%games%
 set /a drawPercentage=%draws%*100/%games%
 set /a scorePercentage=%score%*10/%games%
 set /a rating=%score%*20/%games%
+set /a gmPercent=%goodUserMoves%*100 / %userMoves%
 cls
 :: Displays score and rating
 echo Total games played: %games%
@@ -63,7 +64,6 @@ if %games% GEQ 10 echo You are 100%% as good as the program. Well done!
 if %games% LEQ 9 echo Not enough games played. Cannot get score
 if %games%==20 echo Well done, 20 in a row!
 )
-set /a gmPercent=%goodUserMoves%*100 / %userMoves%
 echo You are %gmPercent%%% similar to the program (%goodUserMoves% moves out of %userMoves%). 
 echo 1= Play
 echo 2= Resume game from ID
