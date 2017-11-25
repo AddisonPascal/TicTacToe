@@ -1,4 +1,4 @@
-:: Version: 3.4.9
+:: Version: 3.5.1
 :: Made by AddisonPascal (Addison Djatschenko)
 :: A perfect batch program for Tic Tac Toe. 
 ::
@@ -654,7 +654,6 @@ goto fromID
 )
 :: Otherwise, save to data.bat
 (
-echo set userWins=%userWins%
 echo set computerWins=%computerWins%
 echo set draws=%draws%
 )>data.bat
