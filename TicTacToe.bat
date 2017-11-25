@@ -653,6 +653,7 @@ goto fromID
 )
 :: Otherwise, save to data.bat
 (
+echo set userWins=%userWins%
 echo set computerWins=%computerWins%
 echo set draws=%draws%
 )>data.bat
