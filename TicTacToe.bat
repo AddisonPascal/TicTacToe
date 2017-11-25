@@ -14,6 +14,10 @@ mode 1000
 set userWins=0
 set computerWins=0
 set draws=0
+set optt=no
+set userMoves=0
+set goodUserMoves=0
+call movedata.bat
 call data.bat
 :: Set title
 title Tic Tac Toe!
@@ -59,6 +63,7 @@ if %games% GEQ 10 echo You are 100%% as good as the program. Well done!
 if %games% LEQ 9 echo Not enough games played. Cannot get score
 if %games%==20 echo Well done, 20 in a row!
 )
+echo Good Moves: %goodUserMoves% out of %userMoves%
 echo 1= Play
 echo 2= Resume game from ID
 echo 3= Create ID from game
@@ -226,6 +231,10 @@ if %c%==%e% (
 if %e%==%g% goto computerWon
 )
 call :draw
+goto computerCheck
+:finishComputerCheck
+set bestMove=%optt%
+set optt=no
 cls
 :: Creates & displays ID, shows position
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%x
@@ -270,30 +279,66 @@ if %i%==9 goto ix
 )
 goto userGo
 :ax
+if %bestMove%==a (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set a=X
 goto computerGo
 :bx
+if %bestMove%==b (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set b=X
 goto computerGo
 :cx
+if %bestMove%==c (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set c=X
 goto computerGo
 :dx
+if %bestMove%==d (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set d=X
 goto computerGo
 :ex
+if %bestMove%==e (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set e=X
 goto computerGo
 :fx
+if %bestMove%==f (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set f=X
 goto computerGo
 :gx
+if %bestMove%==g (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set g=X
 goto computerGo
 :hx
+if %bestMove%==h (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set h=X
 goto computerGo
 :ix
+if %bestMove%==i (
+set /a goodUserMoves=%goodUserMoves%+1
+)
+set /a userMoves=%userMoves%+1
 set i=X
 goto computerGo
 
@@ -647,6 +692,10 @@ pause
 goto save
 
 :save
+(
+echo set goodUserMoves=%goodUserMoves%
+echo set userMoves=%userMoves%
+)>movedata.bat
 :: If write = no, go straight to fromID
 if %write%==no (
 call data.bat
@@ -658,6 +707,182 @@ echo set computerWins=%computerWins%
 echo set draws=%draws%
 )>data.bat
 goto fromID
+
+:computerCheck
+:: 2nd-last resort option
+if %a%==1 (
+set optt=a
+)
+:: 3rd-last resort option
+if %c%==3 (
+set optt=c
+)
+:: 4th-last resort option
+if %g%==7 (
+set optt=g
+)
+:: 5th-last resort option
+if %i%==9 (
+set optt=i
+)
+:: 6th-last resort option
+if %e%==5 (
+set optt=e
+)
+:: Checks to see if the computer can block or win (second best option)
+if %a%==%b% (
+if %c%==3 set optt=c
+)
+if %b%==%c% (
+if %a%==1 set optt=a
+)
+if %a%==%c% (
+if %b%==2 set optt=b
+)
+if %d%==%e% (
+if %f%==6 set optt=f
+)
+if %e%==%f% (
+if %d%==4 set optt=d
+)
+if %d%==%f% (
+if %e%==5 set optt=e
+)
+if %g%==%h% (
+if %i%==9 set optt=i
+)
+if %h%==%i% (
+if %g%==7 set optt=g
+)
+if %g%==%i% (
+if %h%==8 set optt=h
+)
+if %a%==%d% (
+if %g%==7 set optt=g
+)
+if %a%==%g% (
+if %d%==4 set optt=d
+)
+if %d%==%g% (
+if %a%==1 set optt=a
+)
+if %b%==%e% (
+if %h%==8 set optt=h
+)
+if %b%==%h% (
+if %e%==5 set optt=e
+)
+if %h%==%e% (
+if %b%==2 set optt=b
+)
+if %c%==%f% (
+if %i%==9 set optt=i
+)
+if %c%==%i% (
+if %f%==6 set optt=f
+)
+if %i%==%f% (
+if %c%==3 set optt=c
+)
+if %a%==%e% (
+if %i%==9 set optt=i
+)
+if %a%==%i% (
+if %e%==5 set optt=e
+)
+if %i%==%e% (
+if %a%==1 set optt=a
+)
+if %c%==%e% (
+if %g%==7 set optt=g
+)
+if %c%==%g% (
+if %e%==5 set optt=e
+)
+if %g%==%e% (
+if %c%==3 set optt=c
+)
+:: Blocks a coming fork (best option)
+set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%x
+if %id%==1O3OX6789x set optt=a
+if %id%==12O4X6O89x set optt=f
+if %id%==O234X678Ox set optt=f
+if %optt%==a (
+if %a%==1 goto finishComputerCheck
+)
+if %optt%==b (
+if %b%==2 goto finishComputerCheck
+)
+if %optt%==c (
+if %c%==3 goto finishComputerCheck
+)
+if %optt%==d (
+if %d%==4 goto finishComputerCheck
+)
+if %optt%==e (
+if %e%==5 goto finishComputerCheck
+)
+if %optt%==f (
+if %f%==6 goto finishComputerCheck
+)
+if %optt%==g (
+if %g%==7 goto finishComputerCheck
+)
+if %optt%==h (
+if %h%==8 goto finishComputerCheck
+)
+if %optt%==i (
+if %i%==9 goto finishComputerCheck
+)
+:computelCheck
+:: Last resort option
+set /a randomInt=%RANDOM% * (9 - 0 + 1) / 32768 + 0
+if %randomInt%==1 (
+if %a% NEQ 1 goto computelCheck
+set optt=a
+goto finishComputerCheck
+)
+if %randomInt%==2 (
+if %b% NEQ 2 goto computelCheck
+set optt=b
+goto finishComputerCheck
+)
+if %randomInt%==3 (
+if %c% NEQ 3 goto computelCheck
+set optt=c
+goto finishComputerCheck
+)
+if %randomInt%==4 (
+if %d% NEQ 4 goto computelCheck
+set optt=d
+goto finishComputerCheck
+)
+if %randomInt%==5 (
+if %e% NEQ 5 goto computelCheck
+set optt=e
+goto finishComputerCheck
+)
+if %randomInt%==6 (
+if %f% NEQ 6 goto computelCheck
+set optt=f
+goto finishComputerCheck
+)
+if %randomInt%==7 (
+if %g% NEQ 7 goto computelCheck
+set optt=g
+goto finishComputerCheck
+)
+if %randomInt%==8 (
+if %h% NEQ 8 goto computelCheck
+set optt=h
+goto finishComputerCheck
+)
+if %randomInt%==9 (
+if %i% NEQ 9 goto computelCheck
+set optt=i
+goto finishComputerCheck
+)
+goto computelCheck
 
 :draw
 :: Checks if the result is a draw
