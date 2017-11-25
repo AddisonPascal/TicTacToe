@@ -1,9 +1,9 @@
-:: Version: 3.5.1
+:: Version: 3.5.3
 :: Made by AddisonPascal (Addison Djatschenko)
 :: A perfect batch program for Tic Tac Toe. 
 ::
 :: Update info: 
-:: Removed redundant userWins variable in savefile.
+:: Added similarity check to program
 :: 
 :: 
 
@@ -63,7 +63,8 @@ if %games% GEQ 10 echo You are 100%% as good as the program. Well done!
 if %games% LEQ 9 echo Not enough games played. Cannot get score
 if %games%==20 echo Well done, 20 in a row!
 )
-echo Good Moves: %goodUserMoves% out of %userMoves%
+set /a gmPercent=%goodUserMoves%*100 / %userMoves%
+echo You are %gmPercent%%% similar to the program (%goodUserMoves% moves out of %userMoves%). 
 echo 1= Play
 echo 2= Resume game from ID
 echo 3= Create ID from game
