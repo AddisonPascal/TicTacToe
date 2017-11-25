@@ -298,7 +298,7 @@ set i=X
 goto computerGo
 
 :computerGo
-:: Checks if the user won (for playing from a different position ID)
+:: Checks if the user won
 if %a%==%b% (
 if %b%==%c% goto userWon
 )
@@ -422,6 +422,7 @@ if %c%==3 set opt=c
 )
 :: Blocks a coming fork (best option)
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%o
+if %id%==1X3XO6789o set opt=a
 if %id%==12X4O6X89o set opt=f
 if %id%==X234O678Xo set opt=f
 if %opt%==a (
