@@ -1,9 +1,9 @@
-:: Version: 3.5.6
+:: Version: 3.5.7
 :: Made by AddisonPascal (Addison Djatschenko)
 :: A (nearly) perfect batch program for Tic Tac Toe. 
 ::
 :: Update info: 
-:: Patched ANOTHER bug where user could win
+:: Fixed dissimilarities between AIs and another bug.
 :: 
 :: 
 
@@ -758,6 +758,7 @@ goto fromID
 (
 echo set computerWins=%computerWins%
 echo set draws=%draws%
+echo set userWins=%userWins%
 )>data.bat
 goto fromID
 
@@ -857,9 +858,12 @@ if %c%==3 set optt=c
 )
 :: Blocks a coming fork (best option)
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%x
-if %id%==1O3OX6789x set optt=a
-if %id%==12O4X6O89x set optt=f
-if %id%==O234X678Ox set optt=f
+if %id%==1X3XO6789o set opt=a
+if %id%==12X4O6X89o set opt=f
+if %id%==X234O678Xo set opt=f
+if %id%==12XXO6789o set opt=a
+if %id%==1X34O678Xo set opt=c
+if %id%==1X34O6X89o set opt=a
 if %optt%==a (
 if %a%==1 goto finishComputerCheck
 )
