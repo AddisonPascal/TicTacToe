@@ -1,9 +1,9 @@
-:: Version: 3.5.4
+:: Version: 3.5.5
 :: Made by AddisonPascal (Addison Djatschenko)
-:: A perfect batch program for Tic Tac Toe. 
+:: A (nearly) perfect batch program for Tic Tac Toe. 
 ::
 :: Update info: 
-:: Added some game type desciptions
+:: Patched a bug where user could win
 :: 
 :: 
 
@@ -520,6 +520,7 @@ set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%o
 if %id%==1X3XO6789o set opt=a
 if %id%==12X4O6X89o set opt=f
 if %id%==X234O678Xo set opt=f
+if %id%==12XXO6789o set opt=a
 if %opt%==a (
 if %a%==1 goto finishCompute
 )
