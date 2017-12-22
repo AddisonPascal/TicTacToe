@@ -1,9 +1,9 @@
-:: Version: 3.5.3
+:: Version: 3.5.4
 :: Made by AddisonPascal (Addison Djatschenko)
 :: A perfect batch program for Tic Tac Toe. 
 ::
 :: Update info: 
-:: Added similarity check to program
+:: Added some game type desciptions
 :: 
 :: 
 
@@ -145,6 +145,30 @@ set show=yes
 cls
 echo Remember, X is user and O is computer!
 echo ID: %id%
+if %id%==1234O6789x (
+echo Center Attack
+)
+if %id%==X234O678Ox (
+echo Left Diagonal Game
+)
+if %id%==O234O678Xx (
+echo Left Diagonal Game
+)
+if %id%==XOX4O678Ox (
+echo Diagonal Game: Lower Vertical Attack
+)
+if %id%==XOX4O6O89x (
+echo Diagonal Game: Lower Vertical Attack
+)
+if %id%==123456789x (
+echo Starting Position
+)
+if %id%==1234O678Xx (
+echo Lower Right Fork Attack: Center Defence
+)
+if %id%==X234OO78Xx (
+echo Defended Top-Right Fork
+)
 :: For a better look
 set aq=-
 set bq=-
@@ -239,9 +263,34 @@ set optt=no
 cls
 :: Creates & displays ID, shows position
 set id=%a%%b%%c%%d%%e%%f%%g%%h%%i%x
-echo ID: %a%%b%%c%%d%%e%%f%%g%%h%%i%x
+echo ID: %id%
 echo You: X
 echo Computer: O
+echo. 
+if %id%==1234O6789x (
+echo Center Attack
+)
+if %id%==X234O678Ox (
+echo Left Diagonal Game
+)
+if %id%==O234O678Xx (
+echo Left Diagonal Game
+)
+if %id%==XOX4O678Ox (
+echo Diagonal Game: Lower Vertical Attack
+)
+if %id%==XOX4O6O89x (
+echo Diagonal Game: Lower Vertical Attack
+)
+if %id%==123456789x (
+echo Starting Position
+)
+if %id%==1234O678Xx (
+echo Lower Right Fork Attack: Center Defence
+)
+if %id%==X234OO78Xx (
+echo Defended Top-Right Fork
+)
 echo. 
 echo [     %a% %b% %c%     ]
 echo [     %d% %e% %f%     ]
