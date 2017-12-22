@@ -521,7 +521,8 @@ if %id%==1X3XO6789o set opt=a
 if %id%==12X4O6X89o set opt=f
 if %id%==X234O678Xo set opt=f
 if %id%==12XXO6789o set opt=a
-if %id%==1X34O678Xx set opt=c
+if %id%==1X34O678Xo set opt=c
+if %id%==1X34O6X89o set opt=a
 if %opt%==a (
 if %a%==1 goto finishCompute
 )
