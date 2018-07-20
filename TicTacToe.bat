@@ -1,11 +1,11 @@
-:: Version: 3.5.8
+:: Version: 3.5.9
 :: Made by AddisonPascal (Addison Djatschenko)
 :: A perfect batch program for Tic Tac Toe. 
 :: The ELO of this AI is approximately 1497 against a random opponent of 1000 elo (based on 10000 games)
-:: It wins against a random opponent approximately 95% of the time. 
+:: Its win percentage against a random opponent is approximately 95% (where draws count as half a win)
 ::
 :: Update info: 
-:: Added elo info in comments.
+:: Fixed percentage info in comments.
 :: 
 :: 
 
