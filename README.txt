@@ -1,5 +1,5 @@
 TicTacToe
-=========
+
 
 A tic-tac-toe AI that is invincible! Made by Addison Djatschenko
 (AddisonPascal)
@@ -16,7 +16,7 @@ Features:
 | Computer win percentage
 | Draws
 | Draw percentage
-| How good you are (“you are \*\*% as good as the computer“)
+| How good you are ('you are **% as good as the computer')
 | Play
 | Resume game from ID
 | Info
