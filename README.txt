@@ -1,8 +1,7 @@
-TicTacToe
-
-
-A tic-tac-toe AI that is invincible! Made by Addison Djatschenko
-(AddisonPascal)
+TicTacToe version 3.5.8
+Made by AddisonPascal (Addison Djatschenko)
+A perfect batch program for TicTacToe.
+The ELO of this AI is approximately 1497 against a random opponent of 1000 elo (based on 10000 games)
 
 Features:
 
